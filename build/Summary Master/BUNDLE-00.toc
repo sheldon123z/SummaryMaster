@@ -1,0 +1,3 @@
+([('Summary Master',
+   '/Users/xiaodongzheng/Downloads/LLM summary/scripts/dist/Summary Master',
+   'EXECUTABLE')],)
