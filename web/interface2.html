@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF 文章批量总结生成器</title>
+    <style>
+        /* 添加一些基本的样式 */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .input-group {
+            margin-bottom: 10px;
+        }
+        .input-group label {
+            display: inline-block;
+            width: 150px;
+            text-align: right;
+            padding-right: 10px;
+        }
+        .input-group input {
+            width: 200px;
+        }
+        .input-group button {
+            margin-left: 10px;
+        }
+        #progress-bar {
+            width: 200px;
+            height: 20px;
+            background-color: #f3f3f3;
+            border: 1px solid #ddd;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        #progress-bar div {
+            height: 100%;
+            background-color: #4CAF50;
+            width: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>PDF 文章批量总结生成器</h1>
+    <div id="input-form">
+        <!-- 输入框和按钮将在这里插入 -->
+    </div>
+    <div id="progress-bar">
+        <div id="progress-bar-fill"></div>
+    </div>
+    <div id="summary" style="display: none;">
+        <h2>总结:</h2>
+        <p id="summary-text"></p>
+    </div>
+
+    <script>
+        // 创建输入框和按钮
+        function createInputGroup(labelText, inputId, buttonText, onButtonClick) {
+            const div = document.createElement('div');
+            div.className = 'input-group';
+    
+            const label = document.createElement('label');
+            label.htmlFor = inputId;
+            label.textContent = labelText;
+            div.appendChild(label);
+    
+            const input = document.createElement('input');
+            input.id = inputId;
+            input.type = 'text';
+            div.appendChild(input);
+    
+            const button = document.createElement('button');
+            button.textContent = buttonText;
+            button.onclick = onButtonClick;
+            div.appendChild(button);
+    
+            return div;
+        }
+    
+        function selectFolder(entryId) {
+            const input = document.getElementById(entryId);
+            // 这里可以添加文件选择逻辑，例如使用input元素的files属性
+            // 或者使用File API来选择文件
+        }
+    
+        function toggleProxyEntry(httpEntryId, httpsEntryId, allEntryId, checkboxId) {
+            const httpEntry = document.getElementById(httpEntryId);
+            const httpsEntry = document.getElementById(httpsEntryId);
+            const allEntry = document.getElementById(allEntryId);
+            const checkbox = document.getElementById(checkboxId);
+    
+            if (checkbox.checked) {
+                httpEntry.disabled = false;
+                httpsEntry.disabled = false;
+                allEntry.disabled = false;
+            } else {
+                httpEntry.disabled = true;
+                httpsEntry.disabled = true;
+                allEntry.disabled = true;
+            }
+        }
+    
+        function startProcessing() {
+            // 这里添加处理逻辑，例如发送请求到后端服务器
+            // 并更新进度条和总结文本
+        }
+    
+        // 添加输入组件到HTML中
+        const inputForm = document.getElementById('input-form');
+        inputForm.appendChild(createInputGroup('PDF 文件夹路径:', 'pdf-folder', '选择文件夹', () => selectFolder('pdf-folder')));
+        inputForm.appendChild(createInputGroup('Markdown 输出文件夹:', 'markdown-folder', '选择文件夹', () => selectFolder('markdown-folder')));
+        inputForm.appendChild(createInputGroup('Word 输出文件夹:', 'word-folder', '选择文件夹', () => selectFolder('word-folder')));
+        inputForm.appendChild(createInputGroup('OpenAI API 密钥:', 'api-key', '输入密钥', null));
+        inputForm.appendChild(createInputGroup('OpenAI API 基础 URL:', 'base-url', '输入URL', null));
+        inputForm.appendChild(createInputGroup('http 代理地址:', 'http-proxy', '输入代理地址', null));
+        inputForm.appendChild(createInputGroup('https 代理地址:', 'https-proxy', '输入代理地址', null));
+        inputForm.appendChild(createInputGroup('socks5 代理地址:', 'all-proxy', '输入代理地址', null));
+    
+        const proxyCheckbox = document.createElement('input');
+        proxyCheckbox.id = 'proxy-checkbox';
+        proxyCheckbox.type = 'checkbox';
+        proxyCheckbox.onchange = () => toggleProxyEntry('http-proxy', 'https-proxy', 'all-proxy', 'proxy-checkbox');
+        const proxyLabel = document.createElement('label');
+        proxyLabel.htmlFor = 'proxy-checkbox';
+        proxyLabel.textContent = '使用代理';
+        inputForm.appendChild(proxyCheckbox);
+        inputForm.appendChild(proxyLabel);
+    
+        const startButton = document.createElement('button');
+        startButton.textContent = '开始生成';
+        startButton.onclick = startProcessing;
+        inputForm.appendChild(startButton);
+    
+        // 初始化进度条
+        const progressBarFill = document.getElementById('progress-bar-fill');
+        function updateProgressBar(percentage) {
+            progressBarFill.style.width = percentage + '%';
+        }  
+    </script>
+</body>
+</html>
