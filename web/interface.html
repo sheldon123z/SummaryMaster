@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF 文章批量总结生成器</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>PDF 文章批量总结生成器</h1>
+        <div>
+            <label for="pdf-files">选择PDF文件:</label>
+            <input type="file" id="pdf-files" multiple @change="handleFileUpload">
+        </div>
+        <div v-if="isUploading">
+            <progress :value="uploadProgress" max="100"></progress>
+            <p>{{ uploadProgress }}%</p>
+        </div>
+        <div v-if="summary">
+            <h2>总结:</h2>
+            <p>{{ summary }}</p>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                isUploading: false,
+                uploadProgress: 0,
+                summary: null,
+            },
+            methods: {
+                handleFileUpload(event) {
+                    this.isUploading = true;
+                    this.uploadProgress = 0;
+                    const files = event.target.files;
+                    const totalFiles = files.length;
+                    let processedFiles = 0;
+
+                    for (let i = 0; i < totalFiles; i++) {
+                        const file = files[i];
+                        this.processFile(file).then(() => {
+                            processedFiles++;
+                            this.uploadProgress = (processedFiles / totalFiles) * 100;
+                            if (processedFiles === totalFiles) {
+                                this.isUploading = false;
+                            }
+                        });
+                    }
+                },
+                async processFile(file) {
+                    // 这里是处理文件的逻辑，你需要将Python代码转换为JavaScript代码
+                    // 例如，你可以使用fetch API来发送文件到服务器
+                    // 然后，你可以使用Python的OpenAI库来处理文件内容并生成总结
+                    // 最后，你可以将总结显示在页面上
+                    // 以下是一个示例代码，你需要根据你的实际情况进行修改
+                    const formData = new FormData();
+                    formData.append('file', file);
+                    const response = await fetch('/api/upload', {
+                        method: 'POST',
+                        body: formData,
+                    });
+                    const data = await response.json();
+                    this.summary = data.summary;
+                },
+            },
+        });
+    </script>
+</body>
+</html>

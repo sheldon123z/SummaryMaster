@@ -1,0 +1,122 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+
+# Virtual environment
+.venv/
+pip-wheel-metadata/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Build and distribution directories
+build/
+dist/
+dist2/
+# Log files
+*.log
+
+# Node modules
+web/pdf-summarizer/node_modules
+
+# VS Code directory
+.vscode/
+
+# C/C++
+*.obj
+*.exe
+*.out
+*.o
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+target/
+
+# Environment files
+.env
+
+# Temporary files
+*.tmp
+*.swp
+
+# Windows
+Thumbs.db
+
+# Linux
+*~
+
+# Python
+*.pyc
+.venv/
+
+# Node.js
+node_modules/
+logs
+
+# LaTeX
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+
+#特殊文件夹
+
+web/pdf-summarizer
+mac_version/build
+windows_version/build/
+windows_version/dist/
+windows_version/dist2/
+class
+
