@@ -13,9 +13,10 @@
 
 # 使用方法：
 ## 直接使用release 中打包好的软件
-1. 输入自己的 apikey，最好使用月之暗面 moonshot 的，因为其他很多厂商不支持上传 pdf 文件和 ocr
-2. 如果开了代理，需要点击开启代理，修改为自己的代理端口，默认为 clash 的 127.0.0.1:7890 端口
-3. 生成 word 文档目前还不太 ok，生成的格式还需要调整
+1. 如果是使用 mac，由于苹果的安全限制，首先需要将软件拖入 访达的 `应用程序/Application` 中，然后打开 terminal 使用```sudo xattr -cr /Applications/SummaryMasterProxy.app``` 命令对其进行解除限制
+2. 输入自己的 apikey，最好使用月之暗面 moonshot 的，因为其他很多厂商不支持上传 pdf 文件和 ocr
+3. 如果开了代理，需要点击开启代理，修改为自己的代理端口，默认为 clash 的 127.0.0.1:7890 端口
+4. 生成 word 文档目前还不太 ok，生成的格式还需要调整
 
 ## 使用代码
 1. 首先创建一个新的conda 环境
@@ -46,6 +47,6 @@
   - [ ] word
 - [ ] 兼容性：
   - [x] windows
-  - [ ] mac M 系列
+  - [x] mac M 系列
   - [ ] mac intel
   - [ ] linux

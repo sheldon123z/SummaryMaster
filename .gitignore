@@ -59,11 +59,8 @@ pip-wheel-metadata/
 # Build and distribution directories
 build/
 dist/
-<<<<<<< HEAD
 
-=======
 dist2/
->>>>>>> origin/main
 # Log files
 *.log
 
@@ -123,4 +120,3 @@ mac_version/dist
 windows_version/build/
 windows_version/dist/
 windows_version/dist2/
-
