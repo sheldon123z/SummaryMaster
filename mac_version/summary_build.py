@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 from openai import OpenAI
 import PyPDF2
@@ -12,15 +14,12 @@ api_key = input("请输入 OpenAI API 密钥: ")
 base_url = input("请输入 OpenAI API 基础 URL: ")
 
 # 设置 OpenAI 客户端
-client = OpenAI(
-    api_key=api_key,
-    base_url=base_url,
-)
+client = OpenAI(api_key=api_key, base_url=base_url,)
 
 # 定义解析 PDF 文件的函数
 def extract_text_from_pdf(file_path, max_pages=20):
     text = ""
-    with open(file_path, 'rb') as file:
+    with open(file_path, "rb") as file:
         pdf_reader = PyPDF2.PdfReader(file)
         for page_num in range(min(len(pdf_reader.pages), max_pages)):
             page = pdf_reader.pages[page_num]
@@ -34,14 +33,18 @@ def summarize_text(text, filename):
     response = client.chat.completions.create(
         model="moonshot-v1-32k",
         messages=[
-            {"role": "system", "content": "你是一个高效的学术总结助手。你的任务是通读一篇学术论文，并用中文给出高信息含量的总结。 公式：对于行内公式，使用单个的美元符号`$`符号进行渲染,对于行间公式,使用两对美元符号`$$`加在公式两边进行渲染，比如: 行间公式：$$ y = ax + b $$ ,除了文章标题使用一级标题, 其余板块请你只使用加粗而非多级标题来区分不同板块"},
+            {
+                "role": "system",
+                "content": "你是一个高效的学术总结助手。你的任务是通读一篇学术论文，并用中文给出高信息含量的总结。 公式：对于行内公式，使用单个的美元符号`$`符号进行渲染,对于行间公式,使用两对美元符号`$$`加在公式两边进行渲染，比如: 行间公式：$$ y = ax + b $$ ,除了文章标题使用一级标题, 其余板块请你只使用加粗而非多级标题来区分不同板块",
+            },
             {"role": "system", "content": text},
             {"role": "user", "content": prompt},
         ],
-        temperature=0.1
+        temperature=0.1,
     )
-    summary =response.choices[0].message.content.strip()
+    summary = response.choices[0].message.content.strip()
     return summary
+
 
 # 保存总结为 Markdown 文件
 def save_summaries_to_markdown(filename, summary, output_folder):
@@ -49,8 +52,9 @@ def save_summaries_to_markdown(filename, summary, output_folder):
         os.makedirs(output_folder)
     markdown_filename = f"{os.path.splitext(filename)[0]}.md"
     markdown_path = os.path.join(output_folder, markdown_filename)
-    with open(markdown_path, 'w', encoding='utf-8') as file:
+    with open(markdown_path, "w", encoding="utf-8") as file:
         file.write(f"#{filename.split('.')[0]}\n\n## 总结:\n{summary}\n")
+
 
 def save_summaries_to_word(filename, summary, output_folder):
     if not os.path.exists(output_folder):
@@ -58,27 +62,28 @@ def save_summaries_to_word(filename, summary, output_folder):
     word_filename = f"{os.path.splitext(filename)[0]}.docx"
     word_path = os.path.join(output_folder, word_filename)
     document = Document()
-    
+
     # 设置标题格式
-    title_style = document.styles['Heading 1']
-    title_style.font.name = 'Times New Roman'
+    title_style = document.styles["Heading 1"]
+    title_style.font.name = "Times New Roman"
     title_style.font.size = Pt(14)
     title_style.font.bold = True
-    
+
     # 设置正文格式
-    body_style = document.styles['Normal']
-    body_style.font.name = 'Times New Roman'
+    body_style = document.styles["Normal"]
+    body_style.font.name = "Times New Roman"
     body_style.font.size = Pt(12)
     body_style.font.bold = False
-    
-    document.add_heading(f'文件：{filename}', level=1)
-    document.add_heading('总结：', level=2)
-    
+
+    document.add_heading(f"文件：{filename}", level=1)
+    document.add_heading("总结：", level=2)
+
     # 添加正文段落
     paragraph = document.add_paragraph(summary)
     paragraph.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-    
+
     document.save(word_path)
+
 
 # 逐个文件生成总结
 for filename in os.listdir(folder_path):

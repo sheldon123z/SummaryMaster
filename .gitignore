@@ -59,7 +59,11 @@ pip-wheel-metadata/
 # Build and distribution directories
 build/
 dist/
+<<<<<<< HEAD
 
+=======
+dist2/
+>>>>>>> origin/main
 # Log files
 *.log
 
@@ -113,4 +117,14 @@ logs
 
 #特殊文件夹
 
+<<<<<<< HEAD
 /web/pdf-summarizer
+=======
+web/pdf-summarizer
+mac_version/build
+windows_version/build/
+windows_version/dist/
+windows_version/dist2/
+class
+
+>>>>>>> origin/main
