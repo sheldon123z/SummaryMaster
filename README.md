@@ -30,7 +30,7 @@
    ```
 3. 启动脚本
    ```
-   python mac_version/SummaryProxy.py
+   python scripts/SummaryProxy.py
    ```
 
 
@@ -38,6 +38,11 @@
 
 - [x] 完成项目文档
 - [x] 提交代码
+- [x] 兼容性：
+  - [x] windows
+  - [x] mac M 系列
+  - [x] mac intel
+  - [ ] Web based
 - [ ] 增加自定义 prompt 选项
 - [ ] 增加拖拽放入文件
   - [ ] 增加拖拽放入pdf 文件选项
@@ -48,8 +53,4 @@
 - [ ] 整合图像输出
   - [ ] markdown
   - [ ] word
-- [ ] 兼容性：
-  - [x] windows
-  - [x] mac M 系列
-  - [x] mac intel
-  - [ ] linux
+
