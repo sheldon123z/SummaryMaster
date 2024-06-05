@@ -26,7 +26,7 @@
    ```
 2. 下载依赖
    ```
-   pip install -r requirement.txt
+   pip install -r requirements.txt
    ```
 3. 启动脚本
    ```
@@ -51,5 +51,5 @@
 - [ ] 兼容性：
   - [x] windows
   - [x] mac M 系列
-  - [ ] mac intel
+  - [x] mac intel
   - [ ] linux
