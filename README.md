@@ -30,7 +30,7 @@
    ```
 3. 启动脚本
    ```
-   python scripts/SummaryProxy.py
+   python scripts/SummaryMasterProxy.py
    ```
 
 
